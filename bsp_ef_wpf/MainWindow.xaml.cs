@@ -75,25 +75,25 @@ namespace bsp_ef_wpf
       Context.SaveChanges();
     }
 
-    private void BtSearch_Click(object sender, RoutedEventArgs e)
+    private void TbSearch_KeyDown(object sender, KeyEventArgs e)
     {
-      string searchStr = TbSearchFilter.Text.ToLower();
+      string searchStr = TbSearch.Text.ToLower();
       // Zurücksetzen des Filters
       CollectionView.Filter = null;
       // Typumwandlung der Liste mit der Cast() Methode
       var list = CollectionView.Cast<Nachricht>();
-      Nachricht n = list.FirstOrDefault(x => x.Text.ToLower().Contains(searchStr)
-             || x.NutzerSender.Name.ToLower().Contains(searchStr)
-             || x.NutzerEmpfaenger.Any(y => y.Name.ToLower().Contains(searchStr))
-      
-      );
-      CollectionView.MoveCurrentTo(n);
-    }
+      Func<Nachricht, bool> checkLambda = (x => x.Text.ToLower().Contains(searchStr)
+                  || x.NutzerSender.Name.ToLower().Contains(searchStr)
+                  || x.NutzerEmpfaenger.Any(y => y.Name.ToLower().Contains(searchStr))
+                 );
+      list.FirstOrDefault(checkLambda);
+      if (Context.Nachrichten.Any(checkLambda))
+      {
+        Nachricht n = list.FirstOrDefault(checkLambda);
+        CollectionView.MoveCurrentTo(n);
+      }
 
-    private void BtFilter_Click(object sender, RoutedEventArgs e)
-    {
-      string filter = TbSearchFilter.Text.ToLower();
-      CollectionView.Filter = (x => ((Nachricht)x).Text.ToLower().Contains(filter));
+
     }
 
     private void BtDelete_Click(object sender, RoutedEventArgs e)
@@ -102,6 +102,12 @@ namespace bsp_ef_wpf
       Nachricht n = Context.Nachrichten.Where(x => x.ID_Nachricht == searchID).FirstOrDefault();
       Context.Nachrichten.Remove(n);
       Context.SaveChanges();
+    }
+
+    private void TbSearchFilter_KeyDown(object sender, KeyEventArgs e)
+    {
+      string filter = TbFilter.Text.ToLower();
+      CollectionView.Filter = (x => ((Nachricht)x).Text.ToLower().Contains(filter));
     }
   }
 

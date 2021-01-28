@@ -7,10 +7,11 @@
         mc:Ignorable="d"
         Title="Bsp EF Databinding" Height="550" Width="800"
         Loaded="Window_Loaded"
+        FontSize="14"
         >
 
   <Window.Resources>
-    <!--Eigenschafte von WPF-Elementen (Controls) können über Styles geändert werden.-->
+    <!--Eigenschafte von WPF-Elementen (Controls) können über Styles geändert werden. -->
     <Style x:Key="BasicStyle" TargetType="Control">
       <Setter Property="Margin" Value="2"/>
       <Setter Property="Padding" Value="2"/>
@@ -18,6 +19,8 @@
     <Style TargetType="Button" BasedOn="{StaticResource BasicStyle}"/>
     <Style TargetType="TextBox" BasedOn="{StaticResource BasicStyle}"/>
     <Style TargetType="DataGrid" BasedOn="{StaticResource BasicStyle}"/>
+    <Style TargetType="DatePicker" BasedOn="{StaticResource BasicStyle}"/>
+    <Style TargetType="ListView" BasedOn="{StaticResource BasicStyle}"/>
   </Window.Resources>
   
   <Grid x:Name="ParentGrid">
@@ -86,9 +89,10 @@
     <Button Grid.Row="6" Grid.ColumnSpan="2" Content="Vor" Click="BtForward_Click" />
     <Button Grid.Row="7" Grid.ColumnSpan="2" Content="Zurück" Click="BtBack_Click" />
     <Button Grid.Row="8" Grid.ColumnSpan="2" Content="Änderungen speichern" Click="BtSave_Click" />
-    <TextBox Grid.Row="9" Grid.ColumnSpan="2" x:Name="TbSearchFilter"  />
-    <Button Grid.Row="10" Grid.ColumnSpan="2" Content="Suchen" Click="BtSearch_Click" />
-    <Button Grid.Row="11" Grid.ColumnSpan="2" Content="Filtern" Click="BtFilter_Click" />
+    <TextBox Grid.Row="9" Grid.ColumnSpan="2" x:Name="TbSearch" KeyUp="TbSearch_KeyDown"  />
+    <TextBox Grid.Row="10" Grid.ColumnSpan="2" x:Name="TbFilter" KeyUp="TbSearchFilter_KeyDown"  />
+    <!--<Button Grid.Row="10" Grid.ColumnSpan="2" Content="Suchen" Click="BtSearch_Click" />
+    <Button Grid.Row="11" Grid.ColumnSpan="2" Content="Filtern" Click="BtFilter_Click" />-->
     <Button Grid.Row="12" Grid.ColumnSpan="2" Content="Ausgewähltes Element löschen" Click="BtDelete_Click" />
   </Grid>
 
