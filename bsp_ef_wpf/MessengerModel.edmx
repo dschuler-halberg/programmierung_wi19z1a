@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="messengerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Empfaenger">
+          <Key>
+            <PropertyRef Name="ID_Nachricht" />
+            <PropertyRef Name="ID_Nutzer" />
+          </Key>
+          <Property Name="ID_Nachricht" Type="int" Nullable="false" />
+          <Property Name="ID_Nutzer" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Nachrichten">
+          <Key>
+            <PropertyRef Name="ID_Nachricht" />
+          </Key>
+          <Property Name="ID_Nachricht" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Text" Type="nvarchar" MaxLength="500" />
+          <Property Name="Zeitstempel" Type="datetime" />
+          <Property Name="Sender" Type="int" />
+        </EntityType>
+        <EntityType Name="Nutzer">
+          <Key>
+            <PropertyRef Name="ID_Nutzer" />
+          </Key>
+          <Property Name="ID_Nutzer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="fk_Nachricht">
+          <End Role="Nachrichten" Type="Self.Nachrichten" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Empfaenger" Type="Self.Empfaenger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nachrichten">
+              <PropertyRef Name="ID_Nachricht" />
+            </Principal>
+            <Dependent Role="Empfaenger">
+              <PropertyRef Name="ID_Nachricht" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Nutzer">
+          <End Role="Nutzer" Type="Self.Nutzer" Multiplicity="1" />
+          <End Role="Empfaenger" Type="Self.Empfaenger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nutzer">
+              <PropertyRef Name="ID_Nutzer" />
+            </Principal>
+            <Dependent Role="Empfaenger">
+              <PropertyRef Name="ID_Nutzer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Sender">
+          <End Role="Nutzer" Type="Self.Nutzer" Multiplicity="0..1" />
+          <End Role="Nachrichten" Type="Self.Nachrichten" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nutzer">
+              <PropertyRef Name="ID_Nutzer" />
+            </Principal>
+            <Dependent Role="Nachrichten">
+              <PropertyRef Name="Sender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="messengerModelStoreContainer">
+          <EntitySet Name="Empfaenger" EntityType="Self.Empfaenger" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Nachrichten" EntityType="Self.Nachrichten" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Nutzer" EntityType="Self.Nutzer" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_Nachricht" Association="Self.fk_Nachricht">
+            <End Role="Nachrichten" EntitySet="Nachrichten" />
+            <End Role="Empfaenger" EntitySet="Empfaenger" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Nutzer" Association="Self.fk_Nutzer">
+            <End Role="Nutzer" EntitySet="Nutzer" />
+            <End Role="Empfaenger" EntitySet="Empfaenger" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Sender" Association="Self.fk_Sender">
+            <End Role="Nutzer" EntitySet="Nutzer" />
+            <End Role="Nachrichten" EntitySet="Nachrichten" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="messengerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Nachricht">
+          <Key>
+            <PropertyRef Name="ID_Nachricht" />
+          </Key>
+          <Property Name="ID_Nachricht" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Text" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Zeitstempel" Type="DateTime" Precision="3" />
+          <Property Name="Sender" Type="Int32" />
+          <NavigationProperty Name="NutzerSender" Relationship="Self.fk_Sender" FromRole="Nachrichten" ToRole="Nutzer" />
+          <NavigationProperty Name="NutzerEmpfaenger" Relationship="Self.Empfaenger" FromRole="Nachrichten" ToRole="Nutzer" />
+        </EntityType>
+        <EntityType Name="Nutzer">
+          <Key>
+            <PropertyRef Name="ID_Nutzer" />
+          </Key>
+          <Property Name="ID_Nutzer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="NachrichtenGesendet" Relationship="Self.fk_Sender" FromRole="Nutzer" ToRole="Nachrichten" />
+          <NavigationProperty Name="NachrichtenEmpfangen" Relationship="Self.Empfaenger" FromRole="Nutzer" ToRole="Nachrichten" />
+        </EntityType>
+        <Association Name="fk_Sender">
+          <End Role="Nutzer" Type="Self.Nutzer" Multiplicity="0..1" />
+          <End Role="Nachrichten" Type="messengerModel.Nachricht" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nutzer">
+              <PropertyRef Name="ID_Nutzer" />
+            </Principal>
+            <Dependent Role="Nachrichten">
+              <PropertyRef Name="Sender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Empfaenger">
+          <End Role="Nachrichten" Type="messengerModel.Nachricht" Multiplicity="*" />
+          <End Role="Nutzer" Type="Self.Nutzer" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="MessengerContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Nachrichten" EntityType="messengerModel.Nachricht" />
+          <EntitySet Name="Nutzer" EntityType="Self.Nutzer" />
+          <AssociationSet Name="fk_Sender" Association="Self.fk_Sender">
+            <End Role="Nutzer" EntitySet="Nutzer" />
+            <End Role="Nachrichten" EntitySet="Nachrichten" />
+          </AssociationSet>
+          <AssociationSet Name="Empfaenger" Association="Self.Empfaenger">
+            <End Role="Nachrichten" EntitySet="Nachrichten" />
+            <End Role="Nutzer" EntitySet="Nutzer" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="messengerModelStoreContainer" CdmEntityContainer="MessengerContext">
+          <EntitySetMapping Name="Nachrichten">
+            <EntityTypeMapping TypeName="messengerModel.Nachricht">
+              <MappingFragment StoreEntitySet="Nachrichten">
+                <ScalarProperty Name="ID_Nachricht" ColumnName="ID_Nachricht" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Zeitstempel" ColumnName="Zeitstempel" />
+                <ScalarProperty Name="Sender" ColumnName="Sender" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Nutzer">
+            <EntityTypeMapping TypeName="messengerModel.Nutzer">
+              <MappingFragment StoreEntitySet="Nutzer">
+                <ScalarProperty Name="ID_Nutzer" ColumnName="ID_Nutzer" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Empfaenger" TypeName="messengerModel.Empfaenger" StoreEntitySet="Empfaenger">
+            <EndProperty Name="Nachrichten">
+              <ScalarProperty Name="ID_Nachricht" ColumnName="ID_Nachricht" />
+            </EndProperty>
+            <EndProperty Name="Nutzer">
+              <ScalarProperty Name="ID_Nutzer" ColumnName="ID_Nutzer" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
