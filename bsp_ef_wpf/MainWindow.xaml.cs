@@ -41,38 +41,11 @@ namespace bsp_ef_wpf
 
     private void Window_Loaded(object sender, RoutedEventArgs e)
     {
-      Context.Nachrichten.Load();
-      CollectionView = CollectionViewSource.GetDefaultView(Context.Nachrichten.Local);
+      Context.Nutzer.Load();
+      CollectionView = CollectionViewSource.GetDefaultView(Context.Nutzer.Local);
       //CollectionView.Filter = (x => ((Nachricht)x).ID_Nachricht < 20);
       ParentGrid.DataContext = CollectionView;
 
-    }
-
-    private void BtForward_Click(object sender, RoutedEventArgs e)
-    {
-      // Navigieren zum nächsten Element
-      CollectionView.MoveCurrentToNext();
-      // Falls das Ende überschritten wurde, wird zurück auf das letzte Element gewechselt.
-      if (CollectionView.IsCurrentAfterLast)
-      {
-        //CollectionView.MoveCurrentToLast();
-        CollectionView.MoveCurrentToFirst();
-      }
-    }
-
-    private void BtBack_Click(object sender, RoutedEventArgs e)
-    {
-      CollectionView.MoveCurrentToPrevious();
-      if (CollectionView.IsCurrentBeforeFirst)
-      {
-        //CollectionView.MoveCurrentToFirst();
-        CollectionView.MoveCurrentToLast();
-      }
-    }
-
-    private void BtSave_Click(object sender, RoutedEventArgs e)
-    {
-      Context.SaveChanges();
     }
 
     private void TbSearch_KeyDown(object sender, KeyEventArgs e)
@@ -86,7 +59,7 @@ namespace bsp_ef_wpf
                   || x.NutzerSender.Name.ToLower().Contains(searchStr)
                   || x.NutzerEmpfaenger.Any(y => y.Name.ToLower().Contains(searchStr))
                  );
-      list.FirstOrDefault(checkLambda);
+      //list.FirstOrDefault(checkLambda);
       if (Context.Nachrichten.Any(checkLambda))
       {
         Nachricht n = list.FirstOrDefault(checkLambda);
@@ -94,14 +67,6 @@ namespace bsp_ef_wpf
       }
 
 
-    }
-
-    private void BtDelete_Click(object sender, RoutedEventArgs e)
-    {
-      int searchID = (int)LbMessage.Content;
-      Nachricht n = Context.Nachrichten.Where(x => x.ID_Nachricht == searchID).FirstOrDefault();
-      Context.Nachrichten.Remove(n);
-      Context.SaveChanges();
     }
 
     private void TbSearchFilter_KeyDown(object sender, KeyEventArgs e)

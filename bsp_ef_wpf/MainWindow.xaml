@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:bsp_ef_wpf"
         mc:Ignorable="d"
-        Title="Bsp EF Databinding" Height="550" Width="800"
+        Title="Übung 2" Height="550" Width="800"
         Loaded="Window_Loaded"
         FontSize="14"
         >
@@ -16,85 +16,36 @@
       <Setter Property="Margin" Value="2"/>
       <Setter Property="Padding" Value="2"/>
     </Style>
-    <Style TargetType="Button" BasedOn="{StaticResource BasicStyle}"/>
     <Style TargetType="TextBox" BasedOn="{StaticResource BasicStyle}"/>
     <Style TargetType="DataGrid" BasedOn="{StaticResource BasicStyle}"/>
-    <Style TargetType="DatePicker" BasedOn="{StaticResource BasicStyle}"/>
-    <Style TargetType="ListView" BasedOn="{StaticResource BasicStyle}"/>
   </Window.Resources>
-  
+
   <Grid x:Name="ParentGrid">
-    <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="100"/>
-      <ColumnDefinition Width="*" />
-    </Grid.ColumnDefinitions>
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
       <RowDefinition Height="Auto"/>
       <RowDefinition Height="Auto"/>
       <RowDefinition Height="Auto"/>
       <RowDefinition Height="Auto"/>
-      <RowDefinition Height="Auto"/>
-      <RowDefinition Height="Auto"/>
-      <RowDefinition Height="Auto"/>
-      <RowDefinition Height="Auto"/>
-      <RowDefinition Height="Auto"/>
-      <RowDefinition Height="Auto"/>
-      <RowDefinition Height="Auto"/>
-      <RowDefinition Height="Auto"/>
     </Grid.RowDefinitions>
-    <TextBlock TextWrapping="Wrap">
-      <Run Text="Angezeigte Nachrichten:"/>
-      <Run Text="{Binding Count,Mode=OneWay}"/>
-    </TextBlock>
 
-
-    <!--<DataGrid Grid.Column="1" ItemsSource="{Binding }" AutoGenerateColumns="True" />-->
-    <DataGrid Grid.Row="0" Grid.Column="1"
-          ItemsSource="{Binding }"
+    <DataGrid Grid.Row="0"
+              ItemsSource="{Binding }"
           AutoGenerateColumns="False"
               IsSynchronizedWithCurrentItem="True"
           Height="150" >
       <DataGrid.Columns>
-        <DataGridTextColumn Header="IDNachricht" Binding="{Binding ID_Nachricht}" />
-        <DataGridTextColumn Header="Text"  Binding="{Binding Text}" />
-        <DataGridTextColumn Header="Zeitstempel"  Binding="{Binding Zeitstempel}" />
-        <DataGridTextColumn Header="Sender" Binding="{Binding NutzerSender.Name}" />
-      
+        <DataGridTextColumn Header="IDNutzer" Binding="{Binding ID_Nutzer}" />
+        <DataGridTextColumn Header="Name"  Binding="{Binding Name}" />
       </DataGrid.Columns>
     </DataGrid>
 
-    
-    
-    <Label Grid.Row="1" Grid.Column="0"  Content="ID:" />
-    <Label Grid.Row="1" Grid.Column="1"  x:Name="LbMessage" Content="{Binding /ID_Nachricht}" />
-    <Label Grid.Row="2" Grid.Column="0"  Content="Text:" />
-    <TextBox Grid.Row="2" Grid.Column="1" x:Name="TbText" Text="{Binding /Text}" />
-    <Label Grid.Row="3" Grid.Column="0"  Content="Zeitstempel:" />
-    <DatePicker Grid.Row="3" Grid.Column="1" SelectedDate="{Binding /Zeitstempel}" />
-    <Label Grid.Row="4" Grid.Column="0"  Content="Zeitstempel:" />
-    <TextBox Grid.Row="4"  Grid.Column="1" Text="{Binding /Zeitstempel, StringFormat=dd.MM.yyyy HH:mm:ss}" />
-    <Label Grid.Row="5" Grid.Column="0"  Content="Empfänger:" />
-    <ListView Grid.Row="5" Grid.Column="1" ItemsSource="{Binding /NutzerEmpfaenger}" Height="50" >
-      <ListView.ItemTemplate>
-        <DataTemplate>
-          <StackPanel Orientation="Horizontal">
-            <TextBlock Text="{Binding ID_Nutzer}"/>
-            <TextBlock Text=" - " />
-            <TextBlock Text="{Binding Name}" />
-          </StackPanel>
-        </DataTemplate>
-      </ListView.ItemTemplate>
-    </ListView>
-    <Button Grid.Row="6" Grid.ColumnSpan="2" Content="Vor" Click="BtForward_Click" />
-    <Button Grid.Row="7" Grid.ColumnSpan="2" Content="Zurück" Click="BtBack_Click" />
-    <Button Grid.Row="8" Grid.ColumnSpan="2" Content="Änderungen speichern" Click="BtSave_Click" />
-    <TextBox Grid.Row="9" Grid.ColumnSpan="2" x:Name="TbSearch" KeyUp="TbSearch_KeyDown"  />
-    <TextBox Grid.Row="10" Grid.ColumnSpan="2" x:Name="TbFilter" KeyUp="TbSearchFilter_KeyDown"  />
-    <!--<Button Grid.Row="10" Grid.ColumnSpan="2" Content="Suchen" Click="BtSearch_Click" />
-    <Button Grid.Row="11" Grid.ColumnSpan="2" Content="Filtern" Click="BtFilter_Click" />-->
-    <Button Grid.Row="12" Grid.ColumnSpan="2" Content="Ausgewähltes Element löschen" Click="BtDelete_Click" />
-  </Grid>
 
+    <Label Grid.Row="1" Content="Filter Name:" />
+    <TextBox Grid.Row="2"  x:Name="TbSearch" KeyUp="TbSearch_KeyDown"  />
+
+    <Label Grid.Row="3" Content="Filter ID:" />
+    <TextBox Grid.Row="4" x:Name="TbFilter" KeyUp="TbSearchFilter_KeyDown"  />
+  </Grid>
 </Window>
         
