@@ -43,6 +43,12 @@ namespace bsp_ef_wpf
     {
       Context.Nachrichten.Load();
       CollectionView = CollectionViewSource.GetDefaultView(Context.Nachrichten.Local);
+      int count = 1;
+      foreach (var i in CollectionView)
+      {
+        Console.WriteLine($"Window_Loaded {count}: {i} - {i.GetType()}");
+        count++;
+      }
       //CollectionView.Filter = (x => ((Nachricht)x).ID_Nachricht < 20);
       ParentGrid.DataContext = CollectionView;
 
@@ -50,6 +56,13 @@ namespace bsp_ef_wpf
 
     private void BtForward_Click(object sender, RoutedEventArgs e)
     {
+      int count = 1;
+      foreach (var i in CollectionView)
+      {
+        Console.WriteLine($"BtForward_Click {count}: {i}  - {i.GetType()}");
+        count++;
+      }
+
       // Navigieren zum nächsten Element
       CollectionView.MoveCurrentToNext();
       // Falls das Ende überschritten wurde, wird zurück auf das letzte Element gewechselt.
@@ -80,13 +93,22 @@ namespace bsp_ef_wpf
       string searchStr = TbSearch.Text.ToLower();
       // Zurücksetzen des Filters
       CollectionView.Filter = null;
-      // Typumwandlung der Liste mit der Cast() Methode
-      var list = CollectionView.Cast<Nachricht>();
+      foreach (var i in CollectionView)
+      {
+        Console.WriteLine(i);
+      }
+
       Func<Nachricht, bool> checkLambda = (x => x.Text.ToLower().Contains(searchStr)
                   || x.NutzerSender.Name.ToLower().Contains(searchStr)
                   || x.NutzerEmpfaenger.Any(y => y.Name.ToLower().Contains(searchStr))
                  );
-      list.FirstOrDefault(checkLambda);
+
+      // Typumwandlung der Liste mit der Cast() Methode
+      var list = CollectionView.Cast<Nachricht>();
+      // führt zu Fehler, wenn kein Suchtreffer vorhanden ist.
+      var first = list.FirstOrDefault(checkLambda);
+      // fix:
+      //var list = CollectionView.SourceCollection.Cast<Nachricht>();
       if (Context.Nachrichten.Any(checkLambda))
       {
         Nachricht n = list.FirstOrDefault(checkLambda);
