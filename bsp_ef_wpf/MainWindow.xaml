@@ -27,13 +27,29 @@
       <RowDefinition Height="Auto"/>
       <RowDefinition Height="Auto"/>
       <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
     </Grid.RowDefinitions>
 
     <DataGrid Grid.Row="0"
+              x:Name="DgNames"
               ItemsSource="{Binding }"
           AutoGenerateColumns="False"
               IsSynchronizedWithCurrentItem="True"
-          Height="150" >
+          Height="250" >
+      <DataGrid.CellStyle>
+        <Style TargetType="DataGridCell">
+          <Style.Triggers>
+            <Trigger Property="IsSelected"
+                        Value="True">
+              <Setter Property="Background"
+                        Value="Pink" />
+              <Setter Property="Foreground"
+                        Value="Black" />
+            </Trigger>
+          </Style.Triggers>
+        </Style>
+      </DataGrid.CellStyle>
       <DataGrid.Columns>
         <DataGridTextColumn Header="IDNutzer" Binding="{Binding ID_Nutzer}" />
         <DataGridTextColumn Header="Name"  Binding="{Binding Name}" />
@@ -41,11 +57,15 @@
     </DataGrid>
 
 
-    <Label Grid.Row="1" Content="Filter Name:" />
-    <TextBox Grid.Row="2"  x:Name="TbSearch" KeyUp="TbSearch_KeyDown"  />
+    <Label Grid.Row="1" Content="Suche nach Name:" />
+    <TextBox Grid.Row="2"  x:Name="TbSearch" KeyUp="TbSearch_KeyUp"  />
 
-    <Label Grid.Row="3" Content="Filter ID:" />
-    <TextBox Grid.Row="4" x:Name="TbFilter" KeyUp="TbSearchFilter_KeyDown"  />
+    <Label Grid.Row="3" Content="Filter nach Name:" />
+    <TextBox Grid.Row="4" x:Name="TbFilter" KeyUp="TbSearchFilter_KeyUp"  />
+
+    <Label Grid.Row="5" Content="Filter nach ID:" />
+    <TextBox Grid.Row="6" x:Name="TbFilterID" KeyUp="TbFilterID_KeyUp"  />
+
   </Grid>
 </Window>
         

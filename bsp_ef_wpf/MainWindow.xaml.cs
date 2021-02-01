@@ -43,37 +43,44 @@ namespace bsp_ef_wpf
     {
       Context.Nutzer.Load();
       CollectionView = CollectionViewSource.GetDefaultView(Context.Nutzer.Local);
-      //CollectionView.Filter = (x => ((Nachricht)x).ID_Nachricht < 20);
       ParentGrid.DataContext = CollectionView;
 
     }
 
-    private void TbSearch_KeyDown(object sender, KeyEventArgs e)
+    private void TbSearch_KeyUp(object sender, KeyEventArgs e)
     {
       string searchStr = TbSearch.Text.ToLower();
       // Zurücksetzen des Filters
       CollectionView.Filter = null;
       // Typumwandlung der Liste mit der Cast() Methode
-      var list = CollectionView.Cast<Nachricht>();
-      Func<Nachricht, bool> checkLambda = (x => x.Text.ToLower().Contains(searchStr)
-                  || x.NutzerSender.Name.ToLower().Contains(searchStr)
-                  || x.NutzerEmpfaenger.Any(y => y.Name.ToLower().Contains(searchStr))
-                 );
-      //list.FirstOrDefault(checkLambda);
-      if (Context.Nachrichten.Any(checkLambda))
+      var list = CollectionView.SourceCollection.Cast<Nutzer>();
+      Nutzer n = list.FirstOrDefault(x => x.Name.ToLower().Contains(searchStr));
+      if (n != null)
       {
-        Nachricht n = list.FirstOrDefault(checkLambda);
         CollectionView.MoveCurrentTo(n);
+        DgNames.ScrollIntoView(n);
       }
-
-
     }
 
-    private void TbSearchFilter_KeyDown(object sender, KeyEventArgs e)
+    private void TbSearchFilter_KeyUp(object sender, KeyEventArgs e)
     {
       string filter = TbFilter.Text.ToLower();
-      CollectionView.Filter = (x => ((Nachricht)x).Text.ToLower().Contains(filter));
+      CollectionView.Filter = (x => ((Nutzer)x).Name.ToLower().Contains(filter));
+    }
+
+    private void TbFilterID_KeyUp(object sender, KeyEventArgs e)
+    {
+
+      string filter = TbFilterID.Text.ToLower();
+      CollectionView.Filter = (x => ((Nutzer)x).ID_Nutzer.ToString().ToLower().Contains(filter));
+
+      //Alternativ (immer nur ein Treffer):
+      //int searchID = -1;
+      //Int32.TryParse(filter, out searchID);
+      //CollectionView.Filter = (x => ((Nutzer)x).ID_Nutzer == searchID);
+
     }
   }
+
 
 }
