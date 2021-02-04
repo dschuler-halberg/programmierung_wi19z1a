@@ -1,0 +1,71 @@
+﻿<Window x:Class="_16_u3_nutzerverwaltung.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_16_u3_nutzerverwaltung"
+        mc:Ignorable="d"
+        Title="Übung 3 - Nutzerverwaltung" Height="550" Width="800">
+
+  <Grid Margin="5" x:Name="ParentGrid">
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="100"/>
+      <ColumnDefinition/>
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+      <RowDefinition Height="*"/>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+    <Label Content="ID: "/>
+    <Label Grid.Column="1" Content="{Binding /ID_Nutzer}"/>
+
+    <Label Grid.Row="1" Content="Name: "/>
+    <TextBox  Grid.Row="1"  Grid.Column="1" Text="{Binding /Name}"/>
+
+    <TextBlock Grid.Row="2" TextWrapping="Wrap" Text="Gesendete Nachrichten: "/>
+    <ListView Grid.Row="2"  Grid.Column="1" ItemsSource="{Binding /NachrichtenGesendet }" >
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <StackPanel Orientation="Horizontal">
+            <TextBlock Text="{Binding ID_Nachricht}"/>
+            <TextBlock Text=". " />
+            <TextBlock Text="{Binding Text}" />
+            <TextBlock Text=" - " />
+            <TextBlock Text="{Binding Zeitstempel}" />
+          </StackPanel>
+        </DataTemplate>
+      </ListView.ItemTemplate>
+    </ListView>
+
+    <TextBlock Grid.Row="3" TextWrapping="Wrap" Text="Empfangene Nachrichten: "/>
+    <ListView Grid.Row="3" Grid.Column="1" ItemsSource="{Binding /NachrichtenEmpfangen }">
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <StackPanel Orientation="Horizontal">
+            <TextBlock Text="{Binding ID_Nachricht}"/>
+            <TextBlock Text=". " />
+            <TextBlock Text="{Binding Text}" />
+            <TextBlock Text=" - " />
+            <TextBlock Text="{Binding Zeitstempel}" />
+          </StackPanel>
+        </DataTemplate>
+      </ListView.ItemTemplate>
+    </ListView>
+
+    <Grid Grid.Row="4" Grid.ColumnSpan="2">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition/>
+        <ColumnDefinition/>
+        <ColumnDefinition/>
+      </Grid.ColumnDefinitions>
+      <Button x:Name="BtZurueck" Content="Zurück" Click="BtZurueck_Click" />
+      <Button x:Name="BtVor"  Grid.Column="1" Content="Vor" Click="BtVor_Click"/>
+      <Button x:Name="BtSave"  Grid.Column="2" Content="Speichern" Click="BtSave_Click"/>
+    </Grid>
+
+
+  </Grid>
+</Window>

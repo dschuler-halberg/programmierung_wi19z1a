@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bsp_ef_wpf", "bsp_ef_wpf\bsp_ef_wpf.csproj", "{947215F0-107C-41F3-90F7-34CB1E80A6F3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "16_u3_nutzerverwaltung", "16_u3_nutzerverwaltung\16_u3_nutzerverwaltung.csproj", "{48401966-5FF1-4B24-AA0D-2134A96C9898}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "16_u4_Produktverwaltung", "16_u4_Produktverwaltung\16_u4_Produktverwaltung.csproj", "{167943A8-7644-4440-B4F5-8BE617CF5AED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{947215F0-107C-41F3-90F7-34CB1E80A6F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{947215F0-107C-41F3-90F7-34CB1E80A6F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{947215F0-107C-41F3-90F7-34CB1E80A6F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48401966-5FF1-4B24-AA0D-2134A96C9898}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48401966-5FF1-4B24-AA0D-2134A96C9898}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48401966-5FF1-4B24-AA0D-2134A96C9898}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48401966-5FF1-4B24-AA0D-2134A96C9898}.Release|Any CPU.Build.0 = Release|Any CPU
+		{167943A8-7644-4440-B4F5-8BE617CF5AED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{167943A8-7644-4440-B4F5-8BE617CF5AED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{167943A8-7644-4440-B4F5-8BE617CF5AED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{167943A8-7644-4440-B4F5-8BE617CF5AED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

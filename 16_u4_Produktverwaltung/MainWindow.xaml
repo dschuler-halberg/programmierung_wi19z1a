@@ -1,0 +1,47 @@
+﻿<Window x:Class="_16_u4_Produktverwaltung.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_16_u4_Produktverwaltung"
+        mc:Ignorable="d"
+        Title="Übung 4 - Produktverwaltung" Height="450" Width="800">
+
+  <Grid Margin="5" x:Name="ParentGrid">
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="100"/>
+      <ColumnDefinition/>
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+    <Label Content="ID: "/>
+    <Label Grid.Column="1" Content="{Binding /ProductID}"/>
+
+    <Label Grid.Row="1" Content="Name: "/>
+    <TextBox  Grid.Row="1"  Grid.Column="1" Text="{Binding /Name}"/>
+
+    <Label Grid.Row="2" Content="Produktnr.: "/>
+    <TextBox  Grid.Row="2"  Grid.Column="1" Text="{Binding /ProductNumber}"/>
+
+
+
+    <Grid Grid.Row="4" Grid.ColumnSpan="2">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition/>
+        <ColumnDefinition/>
+        <ColumnDefinition/>
+      </Grid.ColumnDefinitions>
+      <Button x:Name="BtZurueck" Content="Zurück" Click="BtZurueck_Click" />
+      <Button x:Name="BtVor"  Grid.Column="1" Content="Vor" Click="BtVor_Click"/>
+      <Button x:Name="BtSave"  Grid.Column="2" Content="Speichern" Click="BtSave_Click"/>
+    </Grid>
+
+
+  </Grid>
+
+</Window>
