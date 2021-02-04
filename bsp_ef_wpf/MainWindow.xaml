@@ -54,6 +54,7 @@
           ItemsSource="{Binding }"
           AutoGenerateColumns="False"
               IsSynchronizedWithCurrentItem="True"
+              IsReadOnly="True"
           Height="150" >
       <DataGrid.Columns>
         <DataGridTextColumn Header="IDNachricht" Binding="{Binding ID_Nachricht}" />

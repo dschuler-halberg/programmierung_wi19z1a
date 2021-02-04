@@ -13,9 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-using System.Linq;
-using System.Windows;
-using System.Windows.Data;
 using System.Data.Entity;
 using System.ComponentModel;
 
@@ -43,26 +40,12 @@ namespace bsp_ef_wpf
     {
       Context.Nachrichten.Load();
       CollectionView = CollectionViewSource.GetDefaultView(Context.Nachrichten.Local);
-      int count = 1;
-      foreach (var i in CollectionView)
-      {
-        Console.WriteLine($"Window_Loaded {count}: {i} - {i.GetType()}");
-        count++;
-      }
-      //CollectionView.Filter = (x => ((Nachricht)x).ID_Nachricht < 20);
       ParentGrid.DataContext = CollectionView;
 
     }
 
     private void BtForward_Click(object sender, RoutedEventArgs e)
     {
-      int count = 1;
-      foreach (var i in CollectionView)
-      {
-        Console.WriteLine($"BtForward_Click {count}: {i}  - {i.GetType()}");
-        count++;
-      }
-
       // Navigieren zum nächsten Element
       CollectionView.MoveCurrentToNext();
       // Falls das Ende überschritten wurde, wird zurück auf das letzte Element gewechselt.
@@ -104,14 +87,10 @@ namespace bsp_ef_wpf
                  );
 
       // Typumwandlung der Liste mit der Cast() Methode
-      var list = CollectionView.Cast<Nachricht>();
-      // führt zu Fehler, wenn kein Suchtreffer vorhanden ist.
-      var first = list.FirstOrDefault(checkLambda);
-      // fix:
-      //var list = CollectionView.SourceCollection.Cast<Nachricht>();
-      if (Context.Nachrichten.Any(checkLambda))
+      var list = CollectionView.SourceCollection.Cast<Nachricht>();
+      Nachricht n = list.FirstOrDefault(checkLambda);
+      if (n != null)
       {
-        Nachricht n = list.FirstOrDefault(checkLambda);
         CollectionView.MoveCurrentTo(n);
       }
 
