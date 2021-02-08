@@ -26,7 +26,7 @@ namespace _16_u4_Produktverwaltung
 
     private ICollectionView CollectionView;
 
-    private AdventureWorksContext  Context = new AdventureWorksContext();
+    private AdventureWorksContext Context = new AdventureWorksContext();
 
     public MainWindow()
     {
@@ -65,6 +65,33 @@ namespace _16_u4_Produktverwaltung
     private void BtSave_Click(object sender, RoutedEventArgs e)
     {
       Context.SaveChanges();
+    }
+
+    private void TbID_KeyUp(object sender, KeyEventArgs e)
+    {
+      if(e.Key == Key.Tab)
+      {
+        return;
+      }
+      string searchstring = TbID.Text;
+      var list = CollectionView.Cast<Product>();
+      Product p = list.FirstOrDefault(x => x.ProductID.ToString().Contains(searchstring));
+      CollectionView.MoveCurrentTo(p);
+    }
+
+    private void TbPosition_KeyUp(object sender, KeyEventArgs e)
+    {
+      string searchstring = TbPosition.Text;
+      bool isNumber = Int32.TryParse(searchstring, out int pos);
+      if (isNumber)
+      {
+        // Da Indexierung bei 0 beginnt:
+        pos -= 1;
+        if (pos < Context.Products.Count() && pos >= 0)
+        {
+          CollectionView.MoveCurrentToPosition(pos);
+        }
+      }
     }
   }
 

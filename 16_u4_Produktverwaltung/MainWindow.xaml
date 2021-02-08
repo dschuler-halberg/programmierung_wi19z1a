@@ -9,14 +9,22 @@
 
   <Grid Margin="5" x:Name="ParentGrid">
     <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="100"/>
+      <ColumnDefinition Width="Auto"/>
       <ColumnDefinition/>
     </Grid.ColumnDefinitions>
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
       <RowDefinition Height="Auto"/>
       <RowDefinition Height="Auto"/>
-      <RowDefinition Height="*"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
       <RowDefinition Height="Auto"/>
     </Grid.RowDefinitions>
     <Label Content="ID: "/>
@@ -28,9 +36,26 @@
     <Label Grid.Row="2" Content="Produktnr.: "/>
     <TextBox  Grid.Row="2"  Grid.Column="1" Text="{Binding /ProductNumber}"/>
 
+    <!-- 
+    Color, SafetyStockLevel, ReorderPoint, StandardCost, ListPrice, SellStartDate
+    -->
+
+    <Label Grid.Row="3" Content="Farbe: "/>
+    <TextBox Grid.Column="1" Text="{Binding /Color}" Grid.Row="3" ></TextBox>
+    <Label Grid.Row="4" Content="Sicherheitsbestand: "/>
+    <TextBox Grid.Column="1" Text="{Binding /SafetyStockLevel}" Grid.Row="4" ></TextBox>
+    <Label Grid.Row="5" Content="Nachbestellung (Bestand): "/>
+    <TextBox Grid.Column="1" Text="{Binding /ReorderPoint}" Grid.Row="5" ></TextBox>
+    <Label Grid.Row="6" Content="Herstellungskosten: "/>
+    <TextBox Grid.Column="1" Text="{Binding /StandardCost}" Grid.Row="6" ></TextBox>
+    <Label Grid.Row="7" Content="Listenpreis: "/>
+    <TextBox Grid.Column="1" Text="{Binding /ListPrice}" Grid.Row="7" ></TextBox>
+    <Label Grid.Row="8" Content="Verkaufsdatum (Beginn): "/>
+    <!--<DatePicker Grid.Column="1" Text="{Binding /SellStartDate, Mode=TwoWay, StringFormat=dd.MM.yyy}" Grid.Row="8" ></DatePicker>-->
+    <TextBox Grid.Column="1" Text="{Binding /SellStartDate, Mode=TwoWay, StringFormat=dd.MM.yyy}" Grid.Row="8" ></TextBox>
 
 
-    <Grid Grid.Row="4" Grid.ColumnSpan="2">
+    <Grid Grid.Row="9" Grid.ColumnSpan="2">
       <Grid.ColumnDefinitions>
         <ColumnDefinition/>
         <ColumnDefinition/>
@@ -40,7 +65,12 @@
       <Button x:Name="BtVor"  Grid.Column="1" Content="Vor" Click="BtVor_Click"/>
       <Button x:Name="BtSave"  Grid.Column="2" Content="Speichern" Click="BtSave_Click"/>
     </Grid>
+    <Label Grid.Row="10" Content="Springe zu Position: "/>
+    <TextBox  Grid.Row="10" Grid.Column="1" x:Name="TbPosition" KeyUp="TbPosition_KeyUp"></TextBox>
 
+    <Label Grid.Row="11" Content="Suche nach ID: "/>
+    <TextBox  Grid.Row="11" Grid.Column="1" x:Name="TbID" KeyUp="TbID_KeyUp"></TextBox>
+    
 
   </Grid>
 
