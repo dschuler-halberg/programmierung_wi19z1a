@@ -92,9 +92,8 @@
     <Button Grid.Row="8" Grid.ColumnSpan="2" Content="Änderungen speichern" Click="BtSave_Click" />
     <TextBox Grid.Row="9" Grid.ColumnSpan="2" x:Name="TbSearch" KeyUp="TbSearch_KeyDown"  />
     <TextBox Grid.Row="10" Grid.ColumnSpan="2" x:Name="TbFilter" KeyUp="TbSearchFilter_KeyDown"  />
-    <!--<Button Grid.Row="10" Grid.ColumnSpan="2" Content="Suchen" Click="BtSearch_Click" />
-    <Button Grid.Row="11" Grid.ColumnSpan="2" Content="Filtern" Click="BtFilter_Click" />-->
-    <Button Grid.Row="12" Grid.ColumnSpan="2" Content="Ausgewähltes Element löschen" Click="BtDelete_Click" />
+    <Button Grid.Row="11" Grid.ColumnSpan="2" Content="Ausgewähltes Element löschen" Click="BtDelete_Click" />
+    <DataGrid Grid.Row="11" Grid.ColumnSpan="2" x:Name="DgUsers" ItemsSource="{Binding }" />
   </Grid>
 
 </Window>

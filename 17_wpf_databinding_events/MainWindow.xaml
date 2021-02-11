@@ -54,16 +54,19 @@
       </Grid>
     </TabItem>
 
-    <TabItem Header="Aktualisierung von geschachtelten Objekten" >
+    <TabItem Header="Aktualisierung von geschachtelten Objekten" IsSelected="True" >
       <Grid x:Name="GridNestedObjects">
         <Grid.RowDefinitions>
           <RowDefinition Height="Auto"/>
           <RowDefinition/>
           <RowDefinition Height="Auto"/>
           <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="120"/>
+          <ColumnDefinition Width="Auto"/>
           <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Label Content="ID:"/>
@@ -76,8 +79,15 @@
                   />
         <Label Grid.Row="2" Content="Stückpreis ändern:"/>
         <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Items/Product.Price}"/>
-        <Label Grid.Row="3" Content="Gesamtpreis:"/>
-        <Label Grid.Row="3" Grid.Column="1" Content="{Binding Total}"/>
+
+        <Label Grid.Row="3" Content="Beschreibung ändern:"/>
+        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Items/Product.Desc}"/>
+        <Label Grid.Row="4" Content="Name ändern:"/>
+        <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Items/Product.Name}"/>
+        <Label Grid.Row="5" Content="Quantity ändern:"/>
+        <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Items/Quantity}"/>
+        <Label Grid.Row="6" Content="Gesamtpreis:"/>
+        <Label Grid.Row="6" Grid.Column="1" Content="{Binding Total}"/>
       </Grid>
     </TabItem>
 

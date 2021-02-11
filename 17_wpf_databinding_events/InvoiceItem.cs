@@ -7,9 +7,24 @@ namespace WPF_Databinding_Events
 
   {
     public Product Product { get; set; }
-   
-    public int Quantity { get; set; }
 
+
+    public int _quantity;
+    public int Quantity
+    {
+      get
+      {
+        return _quantity;
+      }
+      set
+      {
+        _quantity = value;
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(String.Empty));
+        //Alternativ:
+        //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Quantity"));
+        //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Total"));
+      }
+    }
     public decimal Total {
       get {
         return Product.Price * Quantity;

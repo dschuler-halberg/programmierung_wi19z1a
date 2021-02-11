@@ -42,6 +42,10 @@ namespace bsp_ef_wpf
       CollectionView = CollectionViewSource.GetDefaultView(Context.Nachrichten.Local);
       ParentGrid.DataContext = CollectionView;
 
+
+      //Context.Nutzer.Load();
+      DgUsers.DataContext = CollectionViewSource.GetDefaultView(Context.Nutzer.Local);
+
     }
 
     private void BtForward_Click(object sender, RoutedEventArgs e)
