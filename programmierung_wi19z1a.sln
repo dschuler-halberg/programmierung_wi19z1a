@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "16_u4_Produktverwaltung", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "17_bsp_event_point", "17_bsp_event_point\17_bsp_event_point.csproj", "{2DAAFB03-8235-45CF-AC06-122FDA6E1603}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "17_wpf_databinding_events", "17_wpf_databinding_events\17_wpf_databinding_events.csproj", "{AF4FFC66-E7D0-4F63-A590-170E43E536B6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{2DAAFB03-8235-45CF-AC06-122FDA6E1603}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2DAAFB03-8235-45CF-AC06-122FDA6E1603}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2DAAFB03-8235-45CF-AC06-122FDA6E1603}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF4FFC66-E7D0-4F63-A590-170E43E536B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF4FFC66-E7D0-4F63-A590-170E43E536B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF4FFC66-E7D0-4F63-A590-170E43E536B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF4FFC66-E7D0-4F63-A590-170E43E536B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,129 @@
+﻿<Window x:Class="WPF_Databinding_Events.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_Databinding_Events"
+        mc:Ignorable="d"
+        Title="Aktualierungen über INotifyPropertyChanged-Interface" 
+        Height="450" Width="800" Loaded="Window_Loaded">
+  <TabControl>
+
+    <TabItem Header="Automatisches Update">
+      <Grid x:Name="GridAutoUpdate">
+        <Grid.RowDefinitions>
+          <RowDefinition/>
+          <RowDefinition/>
+          <RowDefinition/>
+          <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="200"/>
+          <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Name:"/>
+        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Name}"/>
+        <Label Grid.Row="1" Content="Beschreibung:"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Desc}"/>
+        <Label Grid.Row="2"  Content="Preis:"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Price}"/>
+        <Label Grid.Row="4" Content="Zusammenfassung:"/>
+        <StackPanel Grid.Row="4" Grid.Column="1">
+          <Label  FontSize="10" Content="{Binding Name}"/>
+          <Label  FontSize="10" Content="{Binding Desc}"/>
+          <Label  FontSize="10" Content="{Binding Price}"/>
+        </StackPanel>
+      </Grid>
+    </TabItem>
+
+    <TabItem Header="Aktualisierung bei Änderungen im Code" >
+      <Grid x:Name="GridChangeInCode">
+        <Grid.RowDefinitions>
+          <RowDefinition/>
+          <RowDefinition/>
+          <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition/>
+          <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Id"/>
+        <Label Grid.Column="1" Content="{Binding InvoiceID}"/>
+        <Label Grid.Row="1" Grid.Column="1" Content="{Binding Date}"/>
+        <Button Grid.Row="2" Grid.ColumnSpan="2" Content="Zufällige ID zuweisen"  Click="BtRandomId_Click" />
+      </Grid>
+    </TabItem>
+
+    <TabItem Header="Aktualisierung von geschachtelten Objekten" >
+      <Grid x:Name="GridNestedObjects">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="120"/>
+          <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Label Content="ID:"/>
+        <Label Grid.Column="1" Content="{Binding InvoiceID}"/>
+
+        <Label Grid.Row="1" Content="Rechnungsposten:"/>
+        <DataGrid Grid.Row="1" Grid.Column="1" 
+                  ItemsSource="{Binding Items}" 
+                  IsSynchronizedWithCurrentItem="True"
+                  />
+        <Label Grid.Row="2" Content="Stückpreis ändern:"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Items/Product.Price}"/>
+        <Label Grid.Row="3" Content="Gesamtpreis:"/>
+        <Label Grid.Row="3" Grid.Column="1" Content="{Binding Total}"/>
+      </Grid>
+    </TabItem>
+
+    <TabItem Header="Aktualisierung an Objekt in einer Aufzählung" >
+      <Grid x:Name="GridObjectEnumerable">
+        <Grid.RowDefinitions>
+          <RowDefinition/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="50"/>
+          <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <DataGrid Grid.ColumnSpan="2" 
+                  ItemsSource="{Binding Items}" 
+                  IsSynchronizedWithCurrentItem="True"
+                  />
+        <Label Grid.Row="1" Content="Name"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Items/Product.Name}"/>
+        <Label Grid.Row="2" Content="Preis"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Items/Product.Price}"/>
+      </Grid>
+    </TabItem>
+
+    <TabItem Header="Änderungen an einer Aufzählung">
+      <Grid x:Name="GridInvoice">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition/>
+          <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Produkte:" />
+        <Label Grid.Column="1" Content="Rechnungsposten:" />
+        <DataGrid Grid.Row="1" x:Name="DgProducts" ItemsSource="{Binding}" MouseDoubleClick="DgProducts_MouseDoubleClick" />
+        <DataGrid Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Items}" />
+        <Label Grid.Row="2" Content="Gesamtpreis: " />
+        <Label Grid.Row="2" Grid.Column="1" Content="{Binding Total}" />
+        <Button Grid.Row="3" Grid.ColumnSpan="2" Content="Gesamtpreis anzeigen"  Click="Button_Click"/>
+      </Grid>
+    </TabItem>
+
+  </TabControl>
+</Window>
