@@ -38,22 +38,28 @@
       </ListView.ItemTemplate>
     </ListView>
 
-
-
     <Label FontSize="20" Grid.Column="1">Warenkorb</Label>
-    <ListBox Margin="10"
+    <ListView Margin="10"
          x:Name="Warenkorb"
          Grid.Row="1" Grid.Column="1"
          MouseDoubleClick="Warenkorb_MouseDoubleClick"   
-             
-             >
+          ItemsSource="{Binding Items}"
+                       >
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <TextBlock>
+        <Run Text="{Binding Product.Name}"/>
+        <Run Text=" - "/>
+        <Run Text="{Binding Quantity}"/>
+        <Run Text=" Menge: " />
+        <Run Text="{Binding Total}"/>
+          </TextBlock>
+        </DataTemplate>
+      </ListView.ItemTemplate>
+    </ListView>
 
-    </ListBox>
-    <Label FontSize="20" Grid.Row="2" Grid.Column="1" x:Name="FinalTotal">
-      Ihr Gesamtpreis ist kommt auf:
+    <Label FontSize="20" Grid.Row="2" Grid.Column="1" x:Name="FinalTotal" Content="{Binding Total}" />
 
-    </Label>
-    <Button Name="Neuberechnung" Click="Neuberechnung_Click" FontSize="20" Margin="20 10" Grid.Row="2">Gesamtpreis neu berechnen</Button>
   </Grid>
 
 </Window>

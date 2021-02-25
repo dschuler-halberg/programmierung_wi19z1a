@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
 
 
@@ -28,11 +31,25 @@ namespace _17_u3_kassensystem
   }
 
 
-  public class InvoiceItem
+  public class InvoiceItem : INotifyPropertyChanged
   {
     public Product Product { get; set; }
 
-    public int Quantity { get; set; }
+    private int _quantity;
+    public int Quantity
+    {
+      get
+      { return _quantity; }
+      set
+      {
+        _quantity = value;
+        //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Quantity"));
+        //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Total"));
+        //oder
+
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(String.Empty));
+      }
+    }
 
     public decimal Total
     {
@@ -48,6 +65,8 @@ namespace _17_u3_kassensystem
       Product = product;
       Quantity = quantity;
     }
+
+    public event PropertyChangedEventHandler PropertyChanged;
 
     public override string ToString()
     {
@@ -71,7 +90,7 @@ namespace _17_u3_kassensystem
 
 
 
-  public class Invoice
+  public class Invoice : INotifyPropertyChanged
   {
     public int InvoiceID { get; set; }
 
@@ -79,7 +98,7 @@ namespace _17_u3_kassensystem
 
     public Customer Customer { get; set; }
 
-    public List<InvoiceItem> Items { get; set; } = new List<InvoiceItem>();
+    public ObservableCollection<InvoiceItem> Items { get; set; } = new ObservableCollection<InvoiceItem>();
 
     public decimal Total
     {
@@ -88,6 +107,35 @@ namespace _17_u3_kassensystem
         return Items.Sum(x => x.Total);
       }
       set { }
+    }
+
+    public event PropertyChangedEventHandler PropertyChanged;
+
+
+    public Invoice()
+    {
+      Items.CollectionChanged += OnCollectionChanged;
+    }
+
+
+    public void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+    {
+
+      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Total"));
+
+      if (e.Action == NotifyCollectionChangedAction.Add)
+      {
+        foreach (InvoiceItem item in e.NewItems)
+        {
+          item.PropertyChanged += InvoiceItemPropertyChanged;
+        }
+      }
+    }
+
+
+    public void InvoiceItemPropertyChanged(object sender, PropertyChangedEventArgs e)
+    {
+      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(String.Empty));
     }
 
 

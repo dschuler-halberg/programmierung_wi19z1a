@@ -63,8 +63,8 @@ namespace _17_u3_kassensystem
 
       Sortiment.DataContext = Stock;
 
-      Warenkorb.ItemsSource = Cart.Items;
-
+      //Warenkorb.ItemsSource = Cart.Items;
+      MainGrid.DataContext = Cart;
     }
 
 
@@ -82,14 +82,12 @@ namespace _17_u3_kassensystem
           {
             i.Quantity++;
             present = true;
-            Warenkorb_SourceUpdated();
           }
         }
         if (!present)
         {
           InvoiceItem newi = new InvoiceItem(selectedProduct, 1);
           Cart.Items.Add(newi);
-          Warenkorb_SourceUpdated();
         }
       }
     }
@@ -97,15 +95,17 @@ namespace _17_u3_kassensystem
 
     private void Warenkorb_MouseDoubleClick(object sender, MouseButtonEventArgs e)
     {
-      if (Cart.Items[Warenkorb.SelectedIndex].Quantity == 1)
+      if (Warenkorb.SelectedIndex >= 0 && Warenkorb.SelectedIndex < Cart.Items.Count)
       {
-        Cart.Items.RemoveAt(Warenkorb.SelectedIndex);
+        if (Cart.Items[Warenkorb.SelectedIndex].Quantity == 1)
+        {
+          Cart.Items.RemoveAt(Warenkorb.SelectedIndex);
+        }
+        else
+        {
+          Cart.Items[Warenkorb.SelectedIndex].Quantity--;
+        }
       }
-      else
-      {
-        Cart.Items[Warenkorb.SelectedIndex].Quantity--;
-      }
-      Warenkorb_SourceUpdated();
     }
 
     private void Neuberechnung_Click(object sender, RoutedEventArgs e)
@@ -117,10 +117,10 @@ namespace _17_u3_kassensystem
       FinalTotal.SetBinding(Label.ContentProperty, TotalBinding);
     }
 
-    private void Warenkorb_SourceUpdated()
-    {
-      Warenkorb.ItemsSource = null;
-      Warenkorb.ItemsSource = Cart.Items;
-    }
+    //private void Warenkorb_SourceUpdated()
+    //{
+    //  Warenkorb.ItemsSource = null;
+    //  Warenkorb.ItemsSource = Cart.Items;
+    //}
   }
 }
