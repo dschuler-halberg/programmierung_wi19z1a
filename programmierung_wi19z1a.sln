@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bsp_enity_framework_code_fi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "17_u3_kassensystem", "17_u3_kassensystem\17_u3_kassensystem.csproj", "{C84152F8-8F27-4680-9C17-3C05AB9FB926}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "18_bsp_master_detail", "18_bsp_master_detail\18_bsp_master_detail.csproj", "{132527F8-C5A5-4E77-9079-0D36ECA619A7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{C84152F8-8F27-4680-9C17-3C05AB9FB926}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C84152F8-8F27-4680-9C17-3C05AB9FB926}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C84152F8-8F27-4680-9C17-3C05AB9FB926}.Release|Any CPU.Build.0 = Release|Any CPU
+		{132527F8-C5A5-4E77-9079-0D36ECA619A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{132527F8-C5A5-4E77-9079-0D36ECA619A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{132527F8-C5A5-4E77-9079-0D36ECA619A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{132527F8-C5A5-4E77-9079-0D36ECA619A7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
