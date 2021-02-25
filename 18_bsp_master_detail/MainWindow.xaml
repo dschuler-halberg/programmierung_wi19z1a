@@ -1,0 +1,45 @@
+﻿<Window x:Class="_18_bsp_master_detail.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_18_bsp_master_detail"
+        mc:Ignorable="d"
+        Title="18 - Beispiel Master-Detail" Height="450" Width="800" Loaded="Window_Loaded">
+  <Grid x:Name="ParentGrid">
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="100"/>
+      <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto"/>
+      <RowDefinition />
+    </Grid.RowDefinitions>
+    <Label Grid.Row="0" Grid.Column="0"  Content="Nutzer:" />
+    <ListBox x:Name="listBox"  Grid.Row="0" Grid.Column="1"  Height="150"
+      ItemsSource="{Binding}"
+      IsSynchronizedWithCurrentItem="True"
+      DisplayMemberPath="Name"
+   />
+    <Label Grid.Row="1" Grid.Column="0"  Content="Nachrichten:" />
+    <DataGrid x:Name="dataGrid" Grid.Row="1" Grid.Column="1" Height="150"
+      ItemsSource="{Binding /NachrichtenGesendet}"
+      IsSynchronizedWithCurrentItem="True"
+      AutoGenerateColumns="False">
+      <DataGrid.Columns>
+        <DataGridTextColumn Header="IDNachricht" Binding="{Binding ID_Nachricht}"/>
+        <DataGridTextColumn Header="Text" Binding="{Binding Text}"/>
+        <DataGridTextColumn Header="Zeitstempel" Binding="{Binding Zeitstempel}"/>
+      </DataGrid.Columns>
+    </DataGrid>
+
+    <Label Grid.Row="2" Grid.Column="0"  Content="Empfänger:" />
+    <ListBox x:Name="listBoxEmpfaenger" Grid.Row="2" Grid.Column="1" Height="150"
+      ItemsSource="{Binding /NachrichtenGesendet/NutzerEmpfaenger}"
+      IsSynchronizedWithCurrentItem="True"
+      DisplayMemberPath="Name"
+    />
+
+  </Grid>
+</Window>
