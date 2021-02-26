@@ -22,24 +22,28 @@
       IsSynchronizedWithCurrentItem="True"
       DisplayMemberPath="Name"
    />
-    <Label Grid.Row="1" Grid.Column="0"  Content="Nachrichten:" />
+
+    <TextBlock TextWrapping="Wrap" Grid.Row="1" Grid.Column="0"  Text="Gesendete Nachrichten:" />
     <DataGrid x:Name="dataGrid" Grid.Row="1" Grid.Column="1" Height="150"
       ItemsSource="{Binding /NachrichtenGesendet}"
       IsSynchronizedWithCurrentItem="True"
       AutoGenerateColumns="False">
       <DataGrid.Columns>
-        <DataGridTextColumn Header="IDNachricht" Binding="{Binding ID_Nachricht}"/>
         <DataGridTextColumn Header="Text" Binding="{Binding Text}"/>
         <DataGridTextColumn Header="Zeitstempel" Binding="{Binding Zeitstempel}"/>
       </DataGrid.Columns>
     </DataGrid>
 
-    <Label Grid.Row="2" Grid.Column="0"  Content="Empfänger:" />
-    <ListBox x:Name="listBoxEmpfaenger" Grid.Row="2" Grid.Column="1" Height="150"
-      ItemsSource="{Binding /NachrichtenGesendet/NutzerEmpfaenger}"
+    <TextBlock TextWrapping="Wrap" Grid.Row="2" Grid.Column="0"  Text="Empfangene Nachrichten:" />
+    <DataGrid Grid.Row="2" Grid.Column="1" 
+      ItemsSource="{Binding /NachrichtenEmpfangen}"
       IsSynchronizedWithCurrentItem="True"
-      DisplayMemberPath="Name"
-    />
-
+      AutoGenerateColumns="False">
+      <DataGrid.Columns>
+        <DataGridTextColumn Header="Text" Binding="{Binding Text}"/>
+        <DataGridTextColumn Header="Zeitstempel" Binding="{Binding Zeitstempel}"/>
+        <DataGridTextColumn Header="Sender" Binding="{Binding NutzerSender.Name}"/>
+      </DataGrid.Columns>
+    </DataGrid>
   </Grid>
 </Window>
