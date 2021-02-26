@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_18_uebung2_kategorien_produkte"
         mc:Ignorable="d"
-        Title="18. Übung 2: Kategorien - Produkte" Height="450" Width="800" Loaded="Window_Loaded">
+        Title="18. Übung 2: Kategorien - Produkte" Height="450" Width="1000" Loaded="Window_Loaded">
 
   <Grid x:Name="ParentGrid">
     <Grid.ColumnDefinitions>
@@ -37,15 +37,42 @@
         IsSynchronizedWithCurrentItem="True"
         AutoGenerateColumns="False">
       <DataGrid.Columns>
-        <DataGridTextColumn Header="ProductID" Binding="{Binding ProductID}"/>
+        <!-- Zur Formatierung, siehe: https://docs.microsoft.com/en-us/dotnet/standard/runtime-libraries-overview-->
+        <!-- https://www.wpf-tutorial.com/data-binding/the-stringformat-property/-->
+        <!-- https://stackoverflow.com/questions/4299329/format-values-in-a-datagrid -->
+
+        <!-- Wenn nur der Wert formatiert werden soll, wird der Formatstring direkt angegeben (ohne geschweifte Klammern).-->
+        <DataGridTextColumn Header="ProductID" Binding="{Binding ProductID, StringFormat=0000}"/>
         <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
-        <DataGridTextColumn Header="ProductNumber" Binding="{Binding ProductNumber }"/>
-        <DataGridTextColumn Header="Color" Binding="{Binding Color }"/>
-        <DataGridTextColumn Header="SafetyStockLevel" Binding="{Binding SafetyStockLevel }"/>
+        <!-- Wenn der Wert mit einem vorgegebenen Text kombiniert werden soll, wird der Platzhalter {0} für den Wert genutzt.-->
+        <DataGridTextColumn Header="ProductNumber" Binding="{Binding ProductNumber, StringFormat=Nr: {0}}"/>
+        <DataGridTextColumn Header="Color" Binding="{Binding Color}"/>
+        <!-- Wenn der Wert formatiert und mit einem vorgegebenen Text kombiniert werden soll, wird der Formatstring in geschweiften Klammern angehängt.-->
+        <DataGridTextColumn Header="SafetyStockLevel" Binding="{Binding SafetyStockLevel, StringFormat= Level: {0:000000} }"/>
         <DataGridTextColumn Header="ReorderPoint" Binding="{Binding ReorderPoint }"/>
-        <DataGridTextColumn Header="StandardCost" Binding="{Binding StandardCost}"/>
-        <DataGridTextColumn Header="ListPrice" Binding="{Binding ListPrice }"/>
-        <DataGridTextColumn Header="SellStartDate" Binding="{Binding SellStartDate }"/>
+        <DataGridTextColumn Header="StandardCost" Binding="{Binding StandardCost, StringFormat=c}"/>
+        <!-- Mithilfe von ConverCulture kann auch eine andere Regionaleinstellung gesetzt werden.-->
+        <DataGridTextColumn Header="ListPrice" Binding="{Binding ListPrice, ConverterCulture='ja-JP', StringFormat=c }"/>
+        <DataGridTextColumn Header="SellStartDate" Binding="{Binding SellStartDate, StringFormat=dd.MM.yyyy }"/>
+        <!-- Komplexe Formatierung mithilfe von DataGridTemplateColumn
+         und einem DataTemplate.
+        https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.datagridtemplatecolumn?view=net-5.0
+        https://www.wpf-tutorial.com/datagrid-control/custom-columns/
+        -->
+        <DataGridTemplateColumn Header="Formatiert mit Datatemplate">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <StackPanel >
+                <Border Background="LightBlue" BorderBrush="Black" BorderThickness="1">
+                  <TextBlock Text="{Binding SellStartDate, StringFormat={}{0:MMM}}" FontSize="14" HorizontalAlignment="Center" />
+                </Border>
+                <Border Background="White" BorderBrush="Black" BorderThickness="1">
+                  <TextBlock Text="{Binding SellStartDate, StringFormat={}{0:yyyy}}" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" />
+                </Border>
+              </StackPanel>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
       </DataGrid.Columns>
     </DataGrid>
   </Grid>
