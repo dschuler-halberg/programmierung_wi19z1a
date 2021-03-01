@@ -29,6 +29,9 @@ namespace _18_u3_nachrichtenuebersicht
 
     private MessengerContext Context = new MessengerContext();
 
+    private List<Nachricht> SearchResults;
+
+
 
     private void Window_Loaded(object sender, RoutedEventArgs e)
     {
@@ -43,34 +46,49 @@ namespace _18_u3_nachrichtenuebersicht
       InitializeComponent();
 
 
-    //  Nachricht current = (Nachricht)CollectionView.CurrentItem;
-    //  List<Nachricht> nachrichten = Context.Nachrichten.ToList();
-    //  int indexOfCurrent = nachrichten.IndexOf(current);
-    //  string searchString = "";
-    ////  List<Nachricht> searchResults = Context.Nachrichten.Where(x => x.Text.Contains(searchString)).ToList();
-    //  List<Nachricht> searchResults = Context.Nachrichten.Skip(indexOfCurrent).Where(x => x.Text.Contains(searchString)).ToList();
-    //  //CollectionView.MoveCurrentTo();
+      //  Nachricht current = (Nachricht)CollectionView.CurrentItem;
+      //  List<Nachricht> nachrichten = Context.Nachrichten.ToList();
+      //  int indexOfCurrent = nachrichten.IndexOf(current);
+      //  string searchString = "";
+      ////  List<Nachricht> searchResults = Context.Nachrichten.Where(x => x.Text.Contains(searchString)).ToList();
+      //  List<Nachricht> searchResults = Context.Nachrichten.Skip(indexOfCurrent).Where(x => x.Text.Contains(searchString)).ToList();
+      //  //CollectionView.MoveCurrentTo();
     }
 
     private void weiter_Click(object sender, RoutedEventArgs e)
     {
+      MoveToNextSearchResult();
+    }
 
+    private void MoveToNextSearchResult()
+    {
+      Nachricht current = (Nachricht)CollectionView.CurrentItem;
+      int indexOfCurrent = SearchResults.IndexOf(current);
+      var message = SearchResults.Skip(indexOfCurrent + 1).FirstOrDefault();
+      if (message != null)
+      {
+        CollectionView.MoveCurrentTo(message);
+      }
+      else
+      {
+        CollectionView.MoveCurrentTo(SearchResults[0]);
+      }
     }
 
     private void suche_KeyUp(object sender, KeyEventArgs e)
     {
       if (e.Key == Key.Enter)
       {
-
-
+        MoveToNextSearchResult();
       }
       else
       {
         string searchString = suche.Text;
-        List<Nachricht> searchResults = Context.Nachrichten.Where(x => x.Text.Contains(searchString)).ToList();
-        if (searchResults.Count > 0)
+        SearchResults = Context.Nachrichten.Where(x => x.Text.Contains(searchString)).ToList();
+        LbNumResults.Content = SearchResults.Count;
+        if (SearchResults.Count > 0)
         {
-          CollectionView.MoveCurrentTo(searchResults[0]);
+          CollectionView.MoveCurrentTo(SearchResults[0]);
         }
       }
     }
