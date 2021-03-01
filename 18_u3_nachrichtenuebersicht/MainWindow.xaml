@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_18_u3_nachrichtenuebersicht"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
 
-  <Grid>
+  <Grid x:Name="ParentGrid">
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="3*"/>
       <ColumnDefinition Width="*"/>
@@ -19,10 +19,22 @@
       <RowDefinition Height="*"/>
     </Grid.RowDefinitions>
 
-    <DataGrid Grid.RowSpan="2" x:Name="nachrichten"/>
-    <TextBox x:Name="sender" Grid.Column="1" Text="Sender"/>
-    <DataGrid Grid.Column="2" Grid.RowSpan="2" x:Name="empfaenger"/>
-    <TextBox x:Name="suche" Grid.Column="1" Text="Suche" Grid.Row="2"/>
+    <DataGrid Grid.RowSpan="2" x:Name="nachrichten"  ItemsSource="{Binding}"
+              IsSynchronizedWithCurrentItem="True"
+              
+              
+              >
+      <DataGrid.Resources>
+        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" 
+                   Color="#FF0000"/>
+      </DataGrid.Resources>
+
+
+
+    </DataGrid>
+    <TextBox x:Name="sender" Grid.Column="1" Text="{Binding /NutzerSender.Name }"/>
+    <DataGrid Grid.Column="2" Grid.RowSpan="2" x:Name="empfaenger" ItemsSource="{Binding /NutzerEmpfaenger}"/>
+    <TextBox x:Name="suche" Grid.Column="1" Text="Suche" Grid.Row="2" KeyUp="suche_KeyUp"/>
     <Button Grid.Row="2" Content="Weiter" x:Name="weiter" Click="weiter_Click"/>
     <StackPanel Grid.Row="2" Grid.Column="2">
       <Label Content="Anzahl Treffer"/>
