@@ -1,0 +1,26 @@
+﻿<Window x:Class="bsp_image_dropdown.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:bsp_image_dropdown"
+        mc:Ignorable="d"
+        Title="Beispiel Bilder in ComboBox ändern" Height="450" Width="800">
+    <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition/>
+      <RowDefinition/>
+    </Grid.RowDefinitions>
+    <ComboBox x:Name="CbMonkeys" ItemsSource="{Binding}"  Height="100">
+        <ComboBox.ItemTemplate>
+        <DataTemplate>
+          <StackPanel Orientation="Horizontal">
+            <Image Source="{Binding ImagePath}" />
+            <TextBlock Text="{Binding Name}" />
+          </StackPanel>
+        </DataTemplate>
+      </ComboBox.ItemTemplate>
+    </ComboBox>
+    <Button Grid.Row="1" x:Name="BtChangeImages" Content="Bilder in ComboBox ändern" Click="BtChangeImages_Click"  />
+  </Grid> 
+</Window>

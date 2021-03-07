@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "18_uebung2_kategorien_produ
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "18_u3_nachrichtenuebersicht", "18_u3_nachrichtenuebersicht\18_u3_nachrichtenuebersicht.csproj", "{6CCF11AB-C7F6-427A-9EC9-37416B8C7FED}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bsp_image_dropdown", "bsp_image_dropdown\bsp_image_dropdown.csproj", "{2FEEF215-F06C-42F5-B1FC-08199D01AD80}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{6CCF11AB-C7F6-427A-9EC9-37416B8C7FED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6CCF11AB-C7F6-427A-9EC9-37416B8C7FED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6CCF11AB-C7F6-427A-9EC9-37416B8C7FED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FEEF215-F06C-42F5-B1FC-08199D01AD80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FEEF215-F06C-42F5-B1FC-08199D01AD80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FEEF215-F06C-42F5-B1FC-08199D01AD80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FEEF215-F06C-42F5-B1FC-08199D01AD80}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
