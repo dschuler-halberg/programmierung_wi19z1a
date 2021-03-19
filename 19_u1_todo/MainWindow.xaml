@@ -13,7 +13,7 @@
       <RowDefinition Height="Auto"/>
       <RowDefinition Height="Auto"/>
     </Grid.RowDefinitions>
-    <ListView x:Name="Lv1" Height="300" Grid.Row="0" MouseDoubleClick="Lv1_MouseDoubleClick" SelectedItem="true" />
+    <ListView x:Name="Lv1" Height="300" MouseDoubleClick="Lv1_MouseDoubleClick" SelectedItem="true" />
     <TextBox x:Name="Tb1" Grid.Row="1" KeyDown="Tb1_KeyDown"  />
   </Grid>
 </Window>

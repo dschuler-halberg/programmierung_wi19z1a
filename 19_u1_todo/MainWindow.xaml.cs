@@ -19,7 +19,19 @@ namespace _19_u1_todo
   /// Interaction logic for MainWindow.xaml
   /// </summary>
 
+  public class TodoItem
+  {
 
+    public string Text { get; set; }
+
+    public bool Done { get; set; } = false;
+
+    public static TodoItem FromString (string str)
+    {
+      return null;
+    }
+
+  }
 
   public partial class MainWindow : Window
   {
@@ -31,9 +43,16 @@ namespace _19_u1_todo
       //Aufgaben.Add("Putzen");
       InitializeComponent();
       //Lv1.ItemsSource = Aufgaben;
+
+
       if (Properties.Settings.Default.TodoItems == null)
       {
         Properties.Settings.Default.TodoItems = new System.Collections.Specialized.StringCollection();
+      }
+      if(Properties.Settings.Default.DoneItems == null)
+      {
+
+        Properties.Settings.Default.DoneItems = new System.Collections.Specialized.StringCollection();
       }
 
       foreach (string todoitem in Properties.Settings.Default.TodoItems)
@@ -41,6 +60,23 @@ namespace _19_u1_todo
         AddTodoItemToGUI(todoitem);
       }
 
+      foreach (string doneItem in Properties.Settings.Default.DoneItems)
+      {
+        MarkAsDone(doneItem);
+      }
+    }
+
+    private void MarkAsDone(string doneItem)
+    {
+      foreach(var item in Lv1.Items)
+      {
+        ListViewItem lvi = (ListViewItem)item;
+        TextBlock tb = (TextBlock)lvi.Content;
+        if(tb.Text == doneItem)
+        {
+          MarkAsDone(lvi);
+        }
+      }
     }
 
     public int count = 0;
@@ -60,19 +96,17 @@ namespace _19_u1_todo
         Width = 300
       };
 
-      ListViewItem i = new ListViewItem() { Content = bl };
+      ListViewItem newTodoEntry = new ListViewItem() { Content = bl };
       if (count % 2 == 0)
       {
-        i.Background = Brushes.Blue;
+        newTodoEntry.Background = Brushes.Blue;
       }
       else
       {
-        i.Background = Brushes.Red;
+        newTodoEntry.Background = Brushes.Red;
       }
       count++;
-
-      Lv1.Items.Add(i);
-
+      Lv1.Items.Add(newTodoEntry);
     }
 
 
@@ -93,10 +127,19 @@ namespace _19_u1_todo
       if (selected != null)
       {
         ListViewItem lvi = (ListViewItem)selected;
-        lvi.IsEnabled = false;
-        lvi.HorizontalAlignment = HorizontalAlignment.Right;
-        lvi.Background = Brushes.Gray;
+        MarkAsDone(lvi);
+        TextBlock tb = (TextBlock)lvi.Content;
+        string doneItem = tb.Text;
+        Properties.Settings.Default.DoneItems.Add(doneItem);
+        Properties.Settings.Default.Save();
       }
+    }
+
+    private static void MarkAsDone(ListViewItem lvi)
+    {
+      lvi.IsEnabled = false;
+      lvi.HorizontalAlignment = HorizontalAlignment.Right;
+      lvi.Background = Brushes.Gray;
     }
   }
 

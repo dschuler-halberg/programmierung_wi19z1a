@@ -33,5 +33,28 @@ namespace _19_u1_todo.Properties {
                 this["TodoItems"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Specialized.StringCollection DoneItems {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["DoneItems"]));
+            }
+            set {
+                this["DoneItems"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string TodoItemsNew {
+            get {
+                return ((string)(this["TodoItemsNew"]));
+            }
+            set {
+                this["TodoItemsNew"] = value;
+            }
+        }
     }
 }
