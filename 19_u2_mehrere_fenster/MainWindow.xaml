@@ -1,0 +1,36 @@
+﻿<Window x:Class="_19_u2_mehrere_fenster.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_19_u2_mehrere_fenster"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+  <Grid x:Name="ParentGrid">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="auto"/>
+      <RowDefinition Height="24"/>
+      <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+    <Menu Grid.Row="0">
+      <MenuItem Header="Externe Programme">
+        <MenuItem x:Name="Rechner" Header="Taschenrechner" Click="Rechner_Click"/>
+        <MenuItem x:Name="NotePad" Header="Notepad" Click="NotePad_Click"/>
+        <MenuItem x:Name="SQLSMS" Header="SQL Server Management Studio" Click="SQLSMS_Click"/>
+      </MenuItem>
+      <MenuItem x:Name="ProgBeenden" Header="Programm beenden" Click="ProgBeenden_Click"/>
+    </Menu>
+    <TextBox Grid.Row="1" x:Name="FensterName" Height="24"/>
+    <StackPanel Grid.Row="2" Orientation="Vertical">
+      <Button x:Name="Fenster1" Content="Fenster 1" Click="Fenster1_Click"/>
+      <Button x:Name="Dialog1" Content="Dialog 1" Click="Dialog1_Click"/>
+      <Button x:Name="Fenster2" Content="Fenster 2" Click="Fenster2_Click"/>
+      <Button x:Name="Blau" Content="Blau" Click="Blau_Click"/>
+      <Button x:Name="Button300" Content="300x300" Click="Button300_Click"/>
+      <Button x:Name="Ueberraschung" Content="Überraschung" Click="Ueberraschung_Click"/>
+    </StackPanel>
+  </Grid>
+</Window>
+  
+  
+  
