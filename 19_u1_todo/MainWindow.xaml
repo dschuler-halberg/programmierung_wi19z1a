@@ -1,0 +1,19 @@
+﻿<Window x:Class="_19_u1_todo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_19_u1_todo"
+        mc:Ignorable="d"
+        Title="19. Übung 1 - TODO Liste" Height="450" Width="800">
+
+
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+    <ListView x:Name="Lv1" Height="300" Grid.Row="0" MouseDoubleClick="Lv1_MouseDoubleClick" SelectedItem="true" />
+    <TextBox x:Name="Tb1" Grid.Row="1" KeyDown="Tb1_KeyDown"  />
+  </Grid>
+</Window>
