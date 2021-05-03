@@ -20,9 +20,22 @@ namespace _21_beispiel_login
   /// </summary>
   public partial class MainWindow : Window
   {
-    public MainWindow()
+
+    //private string _username;
+
+    //public string Username { get { return _username; } set {
+    //    _username = value;
+    //    LbMain.Content = $"Hallo {value}";
+    //  }
+    //}
+
+    public string Username { get; set; }
+
+    public MainWindow(string username)
     {
       InitializeComponent();
+      Username = username;
+      LbMain.Content = $"Hallo {Username}!";
     }
   }
 }

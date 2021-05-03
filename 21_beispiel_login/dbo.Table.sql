@@ -1,0 +1,7 @@
+﻿CREATE TABLE [dbo].[Logins]
+(
+	  [Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+    [Username] NVARCHAR(MAX) NOT NULL, 
+    [Hash] NVARCHAR(MAX) NOT NULL, 
+    [Salt] NVARCHAR(MAX) NOT NULL
+)

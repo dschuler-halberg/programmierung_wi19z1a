@@ -1,0 +1,27 @@
+﻿<Window x:Class="_21_beispiel_login.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_21_beispiel_login"
+        mc:Ignorable="d"
+        Title="LoginWindow" Height="200" Width="500">
+    <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="Auto" />
+      <ColumnDefinition />
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+      <RowDefinition />
+      <RowDefinition />
+      <RowDefinition />
+      <RowDefinition />
+    </Grid.RowDefinitions>
+    <Label Content="Nutzername:" />
+    <TextBox Grid.Column="1" x:Name="TbUsername" />
+    <Label Grid.Row="1" Content="Passwort:" />
+    <PasswordBox Grid.Column="1" Grid.Row="1" x:Name="PbPassword" />
+    <Button Grid.Row="2" Grid.ColumnSpan="2" Content="Anmelden" Click="Button_Click"/>
+    <Label Grid.Row="3" Grid.ColumnSpan="2" Name="LbMessage" />
+  </Grid>
+</Window>
